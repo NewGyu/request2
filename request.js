@@ -1356,7 +1356,11 @@ Request.prototype.aws = function (opts, now) {
       host: self.uri.host,
       path: self.uri.path,
       method: self.method,
-      headers: self.headers,
+      service: opts.service,
+      region: opts.region,
+      headers: {
+        'content-type': self.getHeader('content-type') || ''
+      },
       body: self.body
     }
     if (opts.service) {
@@ -1365,14 +1369,15 @@ Request.prototype.aws = function (opts, now) {
     var signRes = aws4.sign(options, {
       accessKeyId: opts.key,
       secretAccessKey: opts.secret,
-      sessionToken: opts.session
+      sessionToken: opts.sessionToken
     })
     self.setHeader('authorization', signRes.headers.Authorization)
     self.setHeader('x-amz-date', signRes.headers['X-Amz-Date'])
     if (signRes.headers['X-Amz-Security-Token']) {
       self.setHeader('x-amz-security-token', signRes.headers['X-Amz-Security-Token'])
     }
-  } else {
+  }
+  else {
     // default: use aws-sign2
     var date = new Date()
     self.setHeader('date', date.toUTCString())

@@ -1,4 +1,7 @@
 ## Change Log
+### Dummy for check
+
+hogehoge fugafuga
 
 ### v2.88.0 (2018/08/10)
 - [#2996](https://github.com/request/request/pull/2996) fix(uuid): import versioned uuid (@kwonoj)

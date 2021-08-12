@@ -43,3 +43,5 @@ npm version patch || exit 1
 
 # Push back to the main repo
 git push $remote master --tags || exit 1
+
+# modify some points
